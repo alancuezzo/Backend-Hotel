@@ -50,7 +50,6 @@ router.post(
       validarJWT,
       esAdminRole,
       check("id", "No es un ID válido!").isMongoId(),
-      check("nombre", "El nombre es obligatorio").notEmpty(),
       check("id").custom(esReservaValido),
   
       validarCampos,

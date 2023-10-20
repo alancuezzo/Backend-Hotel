@@ -33,6 +33,7 @@ const obtenerReserva = async (req = request, res = response) => {
 };
 
 const crearReserva = async (req = request, res = response) => {
+  const {precio,categoria,fecha,personas} = req.body;
   const nombre = req.body.nombre.toUpperCase();
 
   const reservaDB = await Reserva.findOne({ nombre });
@@ -45,6 +46,10 @@ const crearReserva = async (req = request, res = response) => {
 
   const data = {
     nombre,
+    precio,
+    categoria,
+    fecha,
+    personas,
     usuario: req.usuario._id,
   };
 
@@ -63,6 +68,7 @@ const crearReserva = async (req = request, res = response) => {
 
 const actualizarReserva = async (req = request, res = response) => {
   const { id } = req.params;
+  const {precio,categoria,fecha,personas} = req.body;
 
   const nombre = req.body.nombre.toUpperCase();
   const usuario = req.usuario._id;
@@ -70,11 +76,19 @@ const actualizarReserva = async (req = request, res = response) => {
   const data = {
     nombre,
     usuario,
+    precio,
+    categoria,
+    fecha,
+    personas,
   };
+
+  if (req.body.nombre) {
+    data.nombre = req.body.nombre.toUpperCase();
+  }
 
   const reserva = await Reserva.findByIdAndUpdate(id, data,{ new: true });
 
-  res.status(200).json({
+  res.status(201).json({
     msg: "Reserva actualizada!",
     reserva,
   });
