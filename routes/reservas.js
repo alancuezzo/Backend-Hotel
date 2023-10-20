@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const { validarJWT } = require("../middlewares/validar_jwt");
-const { esAdminRole } = require("../middlewares/validar_roles");
+const { esAdminRole } = require("../middlewares/validar-roles");
 const { check } = require("express-validator");
 const { validarCampos } = require("../middlewares/validar_campos");
 const { esReservaValido } = require("../helpers/db_validators");
