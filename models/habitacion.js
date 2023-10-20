@@ -7,6 +7,11 @@ const HabitacionSchema = Schema({
     unique: true,
   },
   estado: {
+    habitacionnumero: {
+      type: Number,
+      unique: true,
+      default:100,
+    },
     type: Boolean,
     required: true,
     default: true,
@@ -17,10 +22,6 @@ const HabitacionSchema = Schema({
     required: true,
   },
   precio: {
-    type: Number,
-    default: 0,
-  },
-  cantidad: {
     type: Number,
     default: 0,
   },

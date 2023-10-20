@@ -24,24 +24,24 @@ const obtenerHabitaciones = async (req = request, res = response) => {
 const obtenerHabitacion = async (req = request, res = response) => {
   const { id } = req.params;
 
-  const curso = await Curso.findById(id)
+  const habitacion = await Curso.findById(id)
     .populate("usuario", "nombre")
     .populate("categoria", "nombre");
 
   res.json({
-    curso,
+    habitacion,
   });
 };
 
 const crearHabitacion = async (req = request, res = response) => {
-  const { precio, categoria, img, descripcion,cantidad } = req.body;
+  const { precio, categoria, img, descripcion,habitacionnumero, } = req.body;
   const nombre = req.body.nombre.toUpperCase();
 
-  const habitacionDB = await habitacion.findOne({ nombre });
+  const habitacionDB = await habitacion.findOne({ nombre , habitacionnumero });
 
   if (habitacionDB) {
     res.status(400).json({
-      msg: `La Habitacion ${habitacionDB.nombre} ya existes`,
+      msg: `La Habitacion ${habitacionDB.habitacionnumero} ya existe.`,
     });
   }
 
@@ -52,7 +52,7 @@ const crearHabitacion = async (req = request, res = response) => {
     img,
     descripcion,
     img,
-    cantidad,
+    habitacionnumero,
     usuario: req.usuario._id,
   };
 
@@ -70,7 +70,7 @@ const crearHabitacion = async (req = request, res = response) => {
 
 const actualizarHabitacion = async (req = request, res = response) => {
   const { id } = req.params;
-  const { precio, categoria, descripcion, img, destacado,cantidad } = req.body;
+  const { precio, categoria, descripcion, img, destacado, } = req.body;
 
   const usuario = req.usuario._id;
 
@@ -81,7 +81,6 @@ const actualizarHabitacion = async (req = request, res = response) => {
     img,
     destacado,
     usuario,
-    cantidad,
   };
 
   if (req.body.nombre) {
