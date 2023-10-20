@@ -42,12 +42,12 @@ class Server {
     this.app.use(this.authPath, require("../routes/auth"));
     this.app.use(this.usuarioPath, require("../routes/usuarios"));
     this.app.use(this.categoriasPath, require("../routes/categorias"));
-   
+    this.app.use(this.reservaPath, require("../routes/reservas"));
     
     //Ruta de cursos
     this.app.use(this.habitacionesPath, require("../routes/habitacion"));
     //Reservas
-    this.app.use(this.reservasPath, require("../routes/reservas"));
+    
     //Buscador
     this.app.use(this.buscarPath, require("../routes/buscar"));
     

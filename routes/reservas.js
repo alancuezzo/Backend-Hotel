@@ -1,18 +1,16 @@
 const { Router } = require("express");
+const {
+  crearReserva,
+  obtenerReservas,
+  obtenerReserva,
+  actualizarReserva,
+  borrarReserva,
+} = require("../controllers/reservasCtrl");
 const { validarJWT } = require("../middlewares/validar_jwt");
 const { esAdminRole } = require("../middlewares/validar-roles");
 const { check } = require("express-validator");
 const { validarCampos } = require("../middlewares/validar_campos");
-
-const {
-    reservasGet,
-    reservasPost,
-    reservasPut,
-    reservasDelete,
-    obtenerReserva,
-    crearReserva,
-    borrarReserva,
-  } = require("../controllers/reservasCtrl");
+const { esReservaValido } = require("../helpers/db_validators");
 
   const {
     esMailValido,
@@ -22,7 +20,7 @@ const {
 
   const router = Router();
 
-  router.get("/", reservasGet);
+  router.get("/", obtenerReservas);
 
 router.get(
   "/:id",
