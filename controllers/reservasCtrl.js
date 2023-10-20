@@ -1,5 +1,5 @@
 const { response, request } = require("express");
-const reserva = require("../models/reserva");
+const Reserva = require("../models/reserva");
 
 const obtenerReservas = async (req = request, res = response) => {
   const { desde = 0, limite = 0 } = req.query;

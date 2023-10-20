@@ -37,9 +37,8 @@ router.post(
     "/",
     [
       validarJWT,
-      check("reserva", "La reserva es obligatoria!").notEmpty(),
-      check("correo", "no es un correo valido!").isEmail(),
-      check("correo").custom(esMailValido),
+      esAdminRole,
+      check("nombre", "El nombre es obligatorio").notEmpty(),
       validarCampos,
     ],
     crearReserva
