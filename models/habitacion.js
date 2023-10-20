@@ -1,17 +1,8 @@
 const { Schema, model } = require("mongoose");
 
 const HabitacionSchema = Schema({
-  nombre: {
-    type: String,
-    required: [true, "El nombre es obligatorio"],
-    unique: true,
-  },
+  
   estado: {
-    habitacionnumero: {
-      type: Number,
-      unique: true,
-      default:100,
-    },
     type: Boolean,
     required: true,
     default: true,
@@ -21,10 +12,7 @@ const HabitacionSchema = Schema({
     ref: "Usuario",
     required: true,
   },
-  precio: {
-    type: Number,
-    default: 0,
-  },
+ 
   categoria: {
     type: Schema.Types.ObjectId,
     ref: "Categoria",
@@ -32,6 +20,11 @@ const HabitacionSchema = Schema({
   },
   descripcion: {
     type: String,
+  },
+  estado: {
+    type: Boolean,
+    required: true,
+    default: true,
   },
   img: {
     type: String,

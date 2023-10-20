@@ -10,11 +10,14 @@ class Server {
 
     this.authPath = "/api/auth";
     this.usuarioPath = "/api/usuarios";
+    this.reservaPath = "/api/reservas";
     this.categoriasPath = "/api/categorias";
     //cursos
     this.habitacionesPath = "/api/habitaciones";
     //buscar
     this.buscarPath = "/api/buscar";
+
+    
 
     this.conectarDB();
 
@@ -39,10 +42,15 @@ class Server {
     this.app.use(this.authPath, require("../routes/auth"));
     this.app.use(this.usuarioPath, require("../routes/usuarios"));
     this.app.use(this.categoriasPath, require("../routes/categorias"));
+   
+    
     //Ruta de cursos
     this.app.use(this.habitacionesPath, require("../routes/habitacion"));
+    //Reservas
+    this.app.use(this.reservasPath, require("../routes/reservas"));
     //Buscador
     this.app.use(this.buscarPath, require("../routes/buscar"));
+    
   }
 
   listen() {

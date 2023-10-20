@@ -10,7 +10,7 @@ const obtenerCategorias = async (req = request, res = response) => {
     Categoria.find(query)
       .skip(desde)
       .limit(limite)
-      .populate("usuario", "correo"),
+      .populate("usuario", "correo"), //!MUESTRA QUIEN CREO LA CATEGORIA  <------------------
   ]);
 
   res.json({
@@ -72,7 +72,7 @@ const actualizarCategoria = async (req = request, res = response) => {
     usuario,
   };
 
-  const categoria = await Categoria.findByIdAndUpdate(id, data, { new: true });
+  const categoria = await Categoria.findByIdAndUpdate(id, data,{ new: true });
 
   res.status(200).json({
     msg: "Categoria actualizada!",

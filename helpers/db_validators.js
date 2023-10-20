@@ -43,10 +43,19 @@ const esHabitacionValido = async (id) => {
   }
 };
 
+const esReservaValido = async (id) => {
+  const existeReserva = await Reserva.findById(id);
+
+  if (!existeReserva) {
+    throw new Error(`El Id ${id} no corresponde a una Reserva existente!`);
+  }
+};
+
 module.exports = {
   esMailValido,
   esRolValido,
   esIdValido,
   esCategoriaValido,
   esHabitacionValido,
+  esReservaValido,
 };

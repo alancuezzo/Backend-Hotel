@@ -34,14 +34,14 @@ const obtenerHabitacion = async (req = request, res = response) => {
 };
 
 const crearHabitacion = async (req = request, res = response) => {
-  const { precio, categoria, img, descripcion,habitacionnumero, } = req.body;
+  const { precio, categoria, img, descripcion, } = req.body;
   const nombre = req.body.nombre.toUpperCase();
 
-  const habitacionDB = await habitacion.findOne({ nombre , habitacionnumero });
+  const habitacionDB = await habitacion.findOne({ nombre });
 
   if (habitacionDB) {
     res.status(400).json({
-      msg: `La Habitacion ${habitacionDB.habitacionnumero} ya existe.`,
+      msg: `La Habitacion ${habitacionDB.nombre} ya existes`,
     });
   }
 
@@ -52,7 +52,6 @@ const crearHabitacion = async (req = request, res = response) => {
     img,
     descripcion,
     img,
-    habitacionnumero,
     usuario: req.usuario._id,
   };
 
