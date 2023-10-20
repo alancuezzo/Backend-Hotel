@@ -13,7 +13,6 @@ const ReservaSchema = Schema({
       },
     categoria: {
         type: Schema.Types.ObjectId,
-        type: String,
         ref: "Categoria",
         required: true,
     },
