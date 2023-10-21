@@ -17,7 +17,7 @@ const ReservaSchema = Schema({
         required: true,
     },
     fecha: {
-        type: Date,
+        type: Date, //!dia q se hace la reserva
     },
     precio: {
         type: Number,
@@ -25,6 +25,11 @@ const ReservaSchema = Schema({
     personas:{
         type: Number,
         default: 1,
+    },
+    estado:{
+        type: Boolean,
+        required: true,
+        default: true,
     },
 
     

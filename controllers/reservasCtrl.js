@@ -6,12 +6,11 @@ const obtenerReservas = async (req = request, res = response) => {
   const query = { estado: true };
 
   const [total, reservas] = await Promise.all([
-    reserva.countDocuments(query),
-    reserva.find(query)
-      .skip(Number(desde))
-      .limit(Number(limite))
-      .populate("usuario", "nombre")
-      .populate("categoria", "nombre"),
+    Reserva.countDocuments(query),
+    Reserva.find(query)
+      .skip(desde)
+      .limit(limite)
+      .populate("usuario", "correo"), //!MUESTRA QUIEN CREO LA CATEGORIA  <------------------
   ]);
 
   res.json({
@@ -23,9 +22,10 @@ const obtenerReservas = async (req = request, res = response) => {
 const obtenerReserva = async (req = request, res = response) => {
   const { id } = req.params;
 
-  const reserva = await Reserva.findById(id)
-    .populate("usuario", "nombre")
-    .populate("categoria", "nombre");
+  const reserva = await Reserva.findById(id).populate(
+    "usuario",
+    "nombre correo"
+  );
 
   res.json({
     reserva,
@@ -33,7 +33,7 @@ const obtenerReserva = async (req = request, res = response) => {
 };
 
 const crearReserva = async (req = request, res = response) => {
-  const { precio, categoria, img, descripcion } = req.body;
+  const {precio,categoria,fecha,personas} = req.body;
   const nombre = req.body.nombre.toUpperCase();
 
   const reservaDB = await Reserva.findOne({ nombre });
@@ -46,36 +46,36 @@ const crearReserva = async (req = request, res = response) => {
 
   const data = {
     nombre,
-    categoria,
     precio,
-    img,
-    descripcion,
-    img,
+    categoria,
+    fecha,
+    personas,
     usuario: req.usuario._id,
   };
 
   const reserva = new Reserva(data);
+
   await reserva.save();
 
   if (reserva) {
-    res.status(201).json({
-      msg: "La reserva fue creada con exito!",
+    res.status(200).json({
+      reserva,
+
+      msg: "La reserva se creo correctamente",
     });
   }
 };
 
 const actualizarReserva = async (req = request, res = response) => {
   const { id } = req.params;
-  const { precio, categoria, descripcion, img, destacado } = req.body;
+  const { precio, categoria, personas } = req.body;
 
   const usuario = req.usuario._id;
 
   const data = {
     precio,
-    descripcion,
     categoria,
-    img,
-    destacado,
+    personas,
     usuario,
   };
 
@@ -94,22 +94,22 @@ const actualizarReserva = async (req = request, res = response) => {
 const borrarReserva = async (req = request, res = response) => {
   const { id } = req.params;
 
-  const reservaEliminado = await Reserva.findByIdAndUpdate(
+  const reservaEliminada = await Reserva.findByIdAndUpdate(
     id,
     { estado: false },
     { new: true }
   );
 
   res.json({
-    reserva,
-    msg: `Reserva eliminada! - ${reservaEliminado}`,
+    reservaEliminada,
+    msg: "Reserva eliminada!",
   });
 };
 
 module.exports = {
+  crearReserva,
   obtenerReservas,
   obtenerReserva,
-  crearReserva,
   actualizarReserva,
   borrarReserva,
 };

@@ -32,7 +32,6 @@ router.post(
   "/",
   [
     validarJWT,
-    esAdminRole,
     check("nombre", "El nombre es obligatorio").notEmpty(),
     validarCampos,
   ],
@@ -43,7 +42,6 @@ router.put(
   "/:id",
   [
     validarJWT,
-    esAdminRole,
     check("id", "El id no es valido").isMongoId(),
     check("id").custom(esReservaValido),
     validarCampos,
