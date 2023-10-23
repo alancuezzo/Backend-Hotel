@@ -11,20 +11,20 @@ const login = async (req = request, res = response) => {
 
     if (!usuario) {
       return res.status(400).json({
-        msg: "Correo o password incorrectos! | correo",
+        msg: "Correo o password incorrectos!",
       });
     }
 
     if (!usuario.estado) {
       return res.status(400).json({
-        msg: "Correo o password incorrectos! | estado",
+        msg: "Correo o password incorrectos!",
       });
     }
 
     const validPassword = bcrypt.compareSync(password, usuario.password);
     if (!validPassword) {
       return res.status(400).json({
-        msg: "Correo o password incorrectos! | password",
+        msg: "Correo o password incorrectos!",
       });
     }
 

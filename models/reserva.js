@@ -6,7 +6,12 @@ const ReservaSchema = Schema({
         required: [true, "El nombre es obligatorio!"],
         unique: true,
       },
-    usuario: {
+      estado: {
+        type: Boolean,
+        required: true,
+        default: true,
+      },
+      usuario: {
         type: Schema.Types.ObjectId,
         ref: "Usuario",
         required: true,
@@ -16,25 +21,23 @@ const ReservaSchema = Schema({
         ref: "Categoria",
         required: true,
     },
-    fecha: {
-        type: Date, //!dia q se hace la reserva
+    fechaReserva: {
+        type: Date,
+         //!dia q se hace la reserva
     },
-    precio: {
-        type: Number,
-    },
+    entrada: {
+      type: String,
+      
+  },
+  salida: {
+    type: String,
+     
+},
     personas:{
         type: Number,
         default: 1,
     },
-    estado:{
-        type: Boolean,
-        required: true,
-        default: true,
-    },
-
-    
-
-
+  
 });
 
 module.exports = model("Reserva",ReservaSchema);

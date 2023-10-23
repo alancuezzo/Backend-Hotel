@@ -12,7 +12,7 @@ class Server {
     this.usuarioPath = "/api/usuarios";
     this.reservaPath = "/api/reservas";
     this.categoriasPath = "/api/categorias";
-    //cursos
+  
     this.habitacionesPath = "/api/habitaciones";
     //buscar
     this.buscarPath = "/api/buscar";
@@ -44,7 +44,7 @@ class Server {
     this.app.use(this.categoriasPath, require("../routes/categorias"));
     this.app.use(this.reservaPath, require("../routes/reservas"));
     
-    //Ruta de cursos
+    //Ruta de habitacion
     this.app.use(this.habitacionesPath, require("../routes/habitacion"));
     //Reservas
     

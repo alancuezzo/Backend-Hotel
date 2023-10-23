@@ -3,9 +3,10 @@ const { response, request } = require("express");
 //importar modelos
 const Usuario = require("../models/usuario");
 const Categoria = require("../models/categoria");
-const Curso = require("../models/habitacion");
+const Habitacion = require("../models/habitacion");
+const Reserva = require("../models/reserva");
 
-const coleccionesPermitidas = ["usuarios", "categorias", "cursos"];
+const coleccionesPermitidas = ["usuarios", "categorias", "habitacion", "reserva"];
 
 //Funciones para buscar por "termino"
 //usuarios
@@ -36,17 +37,30 @@ const buscarCategorias = async (termino, res = response) => {
   });
 };
 
-//buscar cursos
-const buscarCursos = async (termino, res = response) => {
+//buscar habitaciones
+const buscarHabitaciones = async (termino, res = response) => {
   const regex = new RegExp(termino, "i");
 
-  const cursos = await Curso.find({
+  const habitaciones = await Habitacion.find({
     $or: [{ nombre: regex }, { descripcion: regex }],
     $and: [{ estado: true }],
   });
 
   res.json({
-    results: cursos,
+    results: habitaciones,
+  });
+};
+
+const buscarReservas = async (termino, res = response) => {
+  const regex = new RegExp(termino, "i");
+
+  const reservas = await Reserva.find({
+    $or: [{ nombre: regex }, { descripcion: regex }],
+    $and: [{ estado: true }],
+  });
+
+  res.json({
+    results: reservas,
   });
 };
 
@@ -69,9 +83,12 @@ const buscar = (req = request, res = response) => {
     case "categorias":
       buscarCategorias(termino, res);
       break;
-    case "cursos":
-      buscarCursos(termino, res);
+    case "habitaciones":
+      buscarHabitaciones(termino, res);
       break;
+      case "reservas":
+        buscarReservas(termino, res);
+        break;
 
     default:
       res.status(500).json({

@@ -1,7 +1,11 @@
 const { Schema, model } = require("mongoose");
 
 const HabitacionSchema = Schema({
-  
+  nombre: {
+    type: String,
+    required: [true, "El nombre es obligatorio!"],
+    unique: true,
+  },
   estado: {
     type: Boolean,
     required: true,
@@ -21,11 +25,6 @@ const HabitacionSchema = Schema({
   descripcion: {
     type: String,
   },
-  estado: {
-    type: Boolean,
-    required: true,
-    default: true,
-  },
   img: {
     type: String,
   },
@@ -33,6 +32,9 @@ const HabitacionSchema = Schema({
     type: Boolean,
     default: false,
   },
+  precio: {
+    type: Number,
+  }
 });
 
 module.exports = model("Habitacion", HabitacionSchema);

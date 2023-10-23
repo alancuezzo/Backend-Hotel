@@ -15,12 +15,13 @@ const {
 
 const router = Router();
 
-router.get("/", obtenerReservas);
+router.get("/", [validarJWT], obtenerReservas);
 
 router.get(
   "/:id",
   [
-    check("id", "El id no es valido").isMongoId(),
+    validarJWT,
+    check("id", "No es un ID válido!").isMongoId(),
     check("id").custom(esReservaValido),
     validarCampos,
   ],

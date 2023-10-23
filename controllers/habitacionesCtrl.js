@@ -1,5 +1,5 @@
 const { response, request } = require("express");
-const habitacion = require("../models/habitacion");
+const Habitacion = require("../models/habitacion");
 
 
 const obtenerHabitaciones = async (req = request, res = response) => {
@@ -7,8 +7,8 @@ const obtenerHabitaciones = async (req = request, res = response) => {
   const query = { estado: true };
 
   const [total, habitaciones] = await Promise.all([
-    habitacion.countDocuments(query),
-    habitacion.find(query)
+    Habitacion.countDocuments(query),
+    Habitacion.find(query)
       .skip(Number(desde))
       .limit(Number(limite))
       .populate("usuario", "nombre")
@@ -24,7 +24,7 @@ const obtenerHabitaciones = async (req = request, res = response) => {
 const obtenerHabitacion = async (req = request, res = response) => {
   const { id } = req.params;
 
-  const habitacion = await Curso.findById(id)
+  const habitacion = await Habitacion.findById(id)
     .populate("usuario", "nombre")
     .populate("categoria", "nombre");
 
@@ -37,7 +37,7 @@ const crearHabitacion = async (req = request, res = response) => {
   const { precio, categoria, img, descripcion, } = req.body;
   const nombre = req.body.nombre.toUpperCase();
 
-  const habitacionDB = await habitacion.findOne({ nombre });
+  const habitacionDB = await Habitacion.findOne({ nombre });
 
   if (habitacionDB) {
     res.status(400).json({
@@ -55,7 +55,7 @@ const crearHabitacion = async (req = request, res = response) => {
     usuario: req.usuario._id,
   };
 
-  const habitacion = new habitacion(data);
+  const habitacion = new Habitacion(data);
 
   await habitacion.save();
 
@@ -104,7 +104,8 @@ const borrarHabitacion = async (req = request, res = response) => {
   );
 
   res.json({
-    msg: `Habitacion eliminado! - ${habitacionEliminada}`,
+    habitacionEliminada,
+    msg: `Habitacion eliminada!`,
   });
 };
 
