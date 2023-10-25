@@ -59,7 +59,7 @@ const usuariosPut = async (req = request, res = response) => {
   });
 
   res.json({
-    mensaje: "Datos de ususario actualizados",
+    mensaje: "Datos de usuarios actualizados",
     password,
     id,
     usuario,
