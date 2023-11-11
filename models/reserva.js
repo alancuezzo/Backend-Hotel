@@ -14,17 +14,14 @@ const ReservaSchema = Schema({
       usuario: {
         type: Schema.Types.ObjectId,
         ref: "Usuario",
-        required: true,
+        required: [true, "El usuario es obligatorio!"]
       },
     categoria: {
         type: Schema.Types.ObjectId,
         ref: "Categoria",
-        required: true,
+        required: [true, "Se debe seleccionar una Categoria!"]
     },
-    fechaReserva: {
-        type: Date,
-         //!dia q se hace la reserva
-    },
+   
     entrada: {
       type: String,
       
@@ -33,11 +30,7 @@ const ReservaSchema = Schema({
     type: String,
      
 },
-    personas:{
-        type: Number,
-        default: 1,
-    },
-  
+
 });
 
 module.exports = model("Reserva",ReservaSchema);

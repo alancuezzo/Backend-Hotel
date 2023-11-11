@@ -33,7 +33,7 @@ const obtenerReserva = async (req = request, res = response) => {
 };
 
 const crearReserva = async (req = request, res = response) => {
-  const { precio, categoria, fechaReserva, personas, entrada , salida } = req.body;
+  const { precio, categoria, entrada , salida } = req.body;
   const nombre = req.body.nombre.toUpperCase();
 
   const reservaDB = await Reserva.findOne({ nombre });
@@ -48,10 +48,8 @@ const crearReserva = async (req = request, res = response) => {
     nombre,
     precio,
     categoria,
-    fechaReserva,
     entrada,
     salida,
-    personas,
     usuario: req.usuario._id,
   };
 

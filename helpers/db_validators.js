@@ -4,6 +4,7 @@ const Categoria = require("../models/categoria");
 const Habitacion = require("../models/habitacion");
 const Reserva = require("../models/reserva");
 
+
 const esMailValido = async (correo) => {
   const existeEmail = await Usuario.findOne({ correo });
 
