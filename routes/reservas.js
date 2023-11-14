@@ -33,7 +33,7 @@ router.post(
   "/",
   [
     validarJWT,
-    check("nombre", "El nombre es obligatorio").notEmpty(),
+    
     validarCampos,
   ],
   crearReserva

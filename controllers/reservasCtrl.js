@@ -33,23 +33,25 @@ const obtenerReserva = async (req = request, res = response) => {
 };
 
 const crearReserva = async (req = request, res = response) => {
-  const { precio, categoria, entrada , salida } = req.body;
-  const nombre = req.body.nombre.toUpperCase();
+  const { acompañantes, categoria,  entrada , salida } = req.body;
+  // const nombre = req.body.nombre.toUpperCase();
 
-  const reservaDB = await Reserva.findOne({ nombre });
+  // const reservaDB = await Reserva.findOne({ usuario });
 
-  if (reservaDB) {
-    res.status(400).json({
-      msg: `La reserva ${reservaDB.nombre} ya existe`,
-    });
-  }
+  // if (reservaDB) {
+  //   res.status(400).json({
+  //     msg: `La reserva ${reservaDB.usuario} ya existe`,
+  //   });
+  // }
 
   const data = {
-    nombre,
-    precio,
+    
+    acompañantes,
     categoria,
+   
     entrada,
     salida,
+    
     usuario: req.usuario._id,
   };
 
@@ -68,12 +70,12 @@ const crearReserva = async (req = request, res = response) => {
 
 const actualizarReserva = async (req = request, res = response) => {
   const { id } = req.params;
-  const { precio, categoria, personas } = req.body;
+  const { categoria, personas } = req.body;
 
   const usuario = req.usuario._id;
 
   const data = {
-    precio,
+    
     categoria,
     personas,
     usuario,

@@ -34,7 +34,16 @@ const HabitacionSchema = Schema({
   },
   precio: {
     type: Number,
-  }
+  },
+disponibilidad: {
+  type: Boolean,
+  default: true,
+},
+cantidad:{
+type: Number,
+required: true
+},
+
 });
 
 module.exports = model("Habitacion", HabitacionSchema);
